@@ -91,9 +91,9 @@ class QuickUnionUF extends UF
     {
         int i = root(p);
         int j = root(q);
-        if (sz[i] > sz[j])
-             { id[j] = i; sz[i] += sz[j]; }
-        else { id[i] = j; sz[j] += sz[i]; }
+        if (sz[i] < sz[j])
+             { id[i] = j; sz[j] += sz[i]; }
+        else { id[j] = i; sz[i] += sz[j]; }
     }
 
     public String toString()
