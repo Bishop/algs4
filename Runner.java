@@ -76,6 +76,7 @@ class QuickUnionUF extends UF
     {
         while (i != id[i]) 
         {
+            id[i] = id[id[i]];
             i = id[i];
         }
         return i;
