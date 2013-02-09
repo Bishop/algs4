@@ -27,14 +27,30 @@ class QuickUnion < UF
     end
 
     def connected?(p, q)
+        root(p) == root(q)
     end
 
     def union(p, q)
+        i, j = root(p), root(q)
+        if @sz[i] < @sz[j]
+            @id[i] = j; @sz[j] += @sz[i]
+        else
+            @id[j] = i; @sz[i] += @sz[j]
+        end
+    end
+
+    def to_s
+        super + " (#{@sz.map(&:to_s).join(' ')})"
     end
 
     private
 
     def root(i)
+        while i != @id[i]
+            @id[i] = @id[@id[i]]
+            i = @id[i]
+        end
+        i
     end
 end
 
