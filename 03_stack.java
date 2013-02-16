@@ -30,14 +30,14 @@ class LinkedStackOfStrings
     }
 }
 
-class FixedCapacityStackOfStrigs
+class ArrayStackOfStrings
 {
     private String[] s;
     private int N = 0;
 
-    public FixedCapacityStackOfStrigs(int capacity)
+    public ArrayStackOfStrings()
     {
-        s = new String[capacity];
+        s = new String[1];
     }
 
     public boolean isEmpty()
@@ -47,6 +47,10 @@ class FixedCapacityStackOfStrigs
 
     public void push(String item)
     {
+        if (N == s.length)
+        {
+            resize(s.length * 2);
+        }
         s[N++] = item;
     }
 
@@ -54,13 +58,22 @@ class FixedCapacityStackOfStrigs
     {
         return s[--N];
     }
+
+    private void resize(int capacity)
+    {
+        String[] copy = new String[capacity];
+
+        System.arraycopy(s, 0, copy, 0, s.length);
+
+        s = copy;
+    }
 }
 
 class StackRunner
 {
     public static void main(String args[])
     {
-        LinkedStackOfStrings stack = new LinkedStackOfStrings();
+        ArrayStackOfStrings stack = new ArrayStackOfStrings();
         for (String arg : args)
         {
             if (arg.equals("-"))
