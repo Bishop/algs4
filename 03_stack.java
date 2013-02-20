@@ -77,21 +77,16 @@ class ArrayStackOfStrings
     }
 }
 
-class QueueOfString
+class QueueOf<T>
 {
     private class Node
     {
-        String item;
+        T item;
         Node next;
     }
     private Node first, last;
 
-    public QueueOfString()
-    {
-
-    }
-
-    public void enqueue(final String newItem)
+    public void enqueue(final T newItem)
     {
         Node oldlast = last;
         last = new Node()
@@ -109,9 +104,9 @@ class QueueOfString
         }
     }
 
-    public String dequeue()
+    public T dequeue()
     {
-        String item = first.item;
+        T item = first.item;
         first = first.next;
         if (isEmpty()) last = null;
         return item;
@@ -147,7 +142,7 @@ class QueueRunner
 {
     public static void main(String args[])
     {
-        QueueOfString queue = new QueueOfString();
+        QueueOf<String> queue = new QueueOf<String>();
         for (String arg : args)
         {
             if (arg.equals("-"))
