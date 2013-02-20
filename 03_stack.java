@@ -77,6 +77,52 @@ class ArrayStackOfStrings
     }
 }
 
+class QueueOfString
+{
+    private class Node
+    {
+        String item;
+        Node next;
+    }
+    private Node first, last;
+
+    public QueueOfString()
+    {
+
+    }
+
+    public void enqueue(final String newItem)
+    {
+        Node oldlast = last;
+        last = new Node()
+        {{
+            item = newItem;
+            next = null;
+        }};
+        if (isEmpty())
+        {
+            first = last;
+        }
+        else
+        {
+            oldlast.next = last;
+        }
+    }
+
+    public String dequeue()
+    {
+        String item = first.item;
+        first = first.next;
+        if (isEmpty()) last = null;
+        return item;
+    }
+
+    public boolean isEmpty()
+    {
+        return first == null;
+    }
+}
+
 class StackRunner
 {
     public static void main(String args[])
@@ -92,6 +138,26 @@ class StackRunner
             else
             {
                 stack.push(arg);
+            }
+        }
+    }
+}
+
+class QueueRunner
+{
+    public static void main(String args[])
+    {
+        QueueOfString queue = new QueueOfString();
+        for (String arg : args)
+        {
+            if (arg.equals("-"))
+            {
+                if (!queue.isEmpty())
+                    System.out.println(queue.dequeue());
+            }
+            else
+            {
+                queue.enqueue(arg);
             }
         }
     }
