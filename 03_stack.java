@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 class LinkedStackOfStrings
 {
     private Node first = null;
@@ -77,13 +79,30 @@ class ArrayStackOfStrings
     }
 }
 
-class QueueOf<T>
+class QueueOf<T> implements Iterable<T>
 {
     private class Node
     {
         T item;
         Node next;
     }
+
+    private class QueueIterator implements Iterator<T>
+    {
+        private Node current = first;
+
+        public boolean hasNext() { return current != null; }
+        public void remove() {}
+        public T next()
+        {
+            T item = current.item;
+            current = current.next;
+            return item;
+        }
+    }
+
+    public Iterator<T> iterator() { return new QueueIterator(); }
+
     private Node first, last;
 
     public void enqueue(final T newItem)
@@ -154,6 +173,11 @@ class QueueRunner
             {
                 queue.enqueue(arg);
             }
+        }
+
+        for (String item: queue)
+        {
+            System.out.println(item);
         }
     }
 }
