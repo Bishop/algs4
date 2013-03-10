@@ -59,6 +59,7 @@ class Shell extends SortAlg
                 for (int j = i; j >= h && less(a[j], a[j - h]); j -= h)
                     exch(a, j, j - h);
             }
+            h /= 3;
         }
     }
 }
@@ -67,12 +68,14 @@ class Experiment
 {
     public static void main(String[] args)
     {
-        int N = Integer.parseInt(args[0]);
-        Double[] a = new Double[N];
-        for (int i = 0; i < N; i++)
-            a[i] = StdRandom.uniform();
-        Insertion.sort(a);
-        for (int i =0; i < N; i++)
+        Integer[] a = new Integer[args.length];
+        for (int i = 0; i < args.length; i++)
+        {
+            a[i] = Integer.parseInt(args[i]);
+        }
+
+        Shell.sort(a);
+        for (int i = 0; i < a.length; i++)
             StdOut.println(a[i]);
     }
 }
